@@ -1,12 +1,17 @@
-import { RENDER_ALL_COUNTRIES, FILTER_BY_CONTINENT, GET_ALL_CONTINENTS, GET_ACTIVITIES, FILTER_BY_ACTIVITY } from "../actions";
+import { RENDER_ALL_COUNTRIES, FILTER_BY_CONTINENT, GET_ALL_CONTINENTS, GET_ACTIVITIES, FILTER_BY_ACTIVITY, ORDER_BY_ALPHABET, ORDER_BY_POPULATION, GET_COUNTRY_BY_NAME, GET_COUNTRY_DETAILS} from "../actions";
 
 const initialState ={
     countries:[],
     allCountries:[],
     continents:[],
     activities:[],
-    activity:'',
-    continentFilter:false
+    activityFiltered:false,
+    continentFiltered:false,
+    filteredCountries:[],
+    countryDetails:{}
+    //activity:'',
+    //continentFilter:false,
+    
 };
 
 const rootReducer = ( state = initialState, action)=>{
@@ -15,21 +20,12 @@ const rootReducer = ( state = initialState, action)=>{
             return{
                 ...state,
                 countries:action.payload,
-                allCountries:action.payload
+                allCountries:action.payload,
+                filteredCountries:[],
+                activityFiltered:false,
+                continentFiltered:false
+
             }
-        case FILTER_BY_CONTINENT:
-            return{
-                ...state,
-                countries:action.payload[0],
-                continentFilter:action.payload[1]
-            }
-            
-          /*   const filteredCountries = state.allCountries
-            const continentFilter = action.payload === 'All'?filteredCountries:filteredCountries.filter(c=>c.continent === action.payload)
-            return{
-                ...state,
-                countries: continentFilter
-            } */
         case GET_ALL_CONTINENTS:
             return{
                 ...state,
@@ -41,11 +37,87 @@ const rootReducer = ( state = initialState, action)=>{
                 activities: action.payload
             }
         case FILTER_BY_ACTIVITY:
-            const allCountries = state.continentFilter?state.countries:state.allCountries
-            const activityFilter = action.payload === 'All' ?allCountries:allCountries.filter(c=>c.activities.map(a=>a.aName).includes(action.payload))
+            const activityCountries = state.continentFiltered?state.filteredCountries:state.allCountries
+            let filteredByActivity
+            if(action.payload === 'All'){
+                filteredByActivity =state.allCountries
+            }else{
+                filteredByActivity = activityCountries.filter(c=>c.activities.map(a=>a.aName).includes(action.payload))}
             return{
                 ...state,
-                countries: activityFilter
+                countries: filteredByActivity,
+                filteredCountries: filteredByActivity,
+                activityFiltered: true
+                
+            }
+        case FILTER_BY_CONTINENT:
+            const continentCountries = state.activityFiltered?state.filteredCountries:state.allCountries
+            const filteredByContinent = action.payload === 'All' ?state.allCountries:continentCountries.filter(c=>c.continent.includes(action.payload))
+            return{
+                ...state,
+                countries: filteredByContinent,
+                filteredCountries: filteredByContinent,
+                continentFiltered:true
+            }
+        case ORDER_BY_POPULATION: 
+            const orderedByPopulation = 
+            action.payload==='asc'?
+            state.countries.sort((a, b) => {
+                if (a.population > b.population) {
+               return 1;
+           }
+           if (a.population < b.population) {
+               return -1;
+           }
+           return 0
+            }):state.countries.sort((a, b) => {
+                if (a.population < b.population) {
+                    return 1;
+                }
+                if (a.population > b.population) {
+                    return -1;
+                }
+                return 0
+                 })
+            return{
+                ...state,
+                countries: orderedByPopulation
+            }
+        case ORDER_BY_ALPHABET:
+            const orderByAlphabet = action.payload === 'a-z' ? state.countries.sort(function (a, b){
+                if (a.cName.toLowerCase() > b.cName.toLowerCase()) {
+                    return 1;
+                }
+                if (a.cName.toLowerCase() < b.cName.toLowerCase()) {
+                    return -1;
+                }
+                return 0
+                    }): state.countries.sort(function (a, b){
+                if (a.cName.toLowerCase() < b.cName.toLowerCase()) {
+                    return 1;
+                }
+                if (a.cName.toLowerCase() > b.cName.toLowerCase()) {
+                return -1;
+                }
+                return 0
+                    })
+                                                                                                        
+            return{
+                ...state,
+                countries: orderByAlphabet
+            }
+        case GET_COUNTRY_BY_NAME:
+                
+            return{
+            ...state,
+            countries: action.payload,
+        
+        }
+        case GET_COUNTRY_DETAILS:
+            return{
+                ...state,
+                countryDetails: action.payload,
+            
             }
         default:
             return{...state}

@@ -1,8 +1,12 @@
 import  React from 'react';
 import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { renderAllCountries, getContinents, filteredByContinent, getActivities, filteredByActivity } from '../../redux/actions';
-import Country from '../Country/Country';
+import { renderAllCountries, getContinents, filteredByContinent, getActivities, filteredByActivity, orderByPopulation, orderByAlphabet } from '../../redux/actions';
+//import Country from '../Country/Country';
+import Nav from '../nav/Nav';
+import Pagination from '../pagination/Pagination'
+import Countries from '../countries/Countries';
+import SearchBar from '../SearchBar/SearchBar';
 
 //import { renderAllRecipes, renderAllDiets, continentFilterRecipesByDiet, continentFilterCreatedRecipes, orderByABC, orderByHealth} from '../../redux/actions';
 //import { Link } from 'react-router-dom';
@@ -12,12 +16,25 @@ import Country from '../Country/Country';
     
 function Home(){
     const dispatch = useDispatch();
-    const [continentFilter, setContinentFilter]=useState(false);
-    //let continentFilter = false;
-    //let continent = ''
-    const [continent, setContinent]=useState('')
-    const [activityFilter, setActivityFilter]=useState(false);
-    const [activity, setActivity]= useState('');
+
+    let theCountries = useSelector(state=> state.countries)
+    let theContinents = useSelector(state=> state.continents)
+    let theActivities = useSelector(state=> state.activities)
+    
+
+    const [order, setOrder]=useState('')
+    //const [selected, setSelected]=
+
+    const [currentPage, setCurrentPage]= useState(1);
+    const [countriesPerPage, setCountriesPerPage]= useState(9);
+    const indexOfNextPageFirstCountry = currentPage * countriesPerPage;//es la ultima receta, hasta donde llega el corte. es decir que es la primera que se muestra en la prixma pagina
+    const indexOfFirstCountry = indexOfNextPageFirstCountry - countriesPerPage;// arranca por el 0
+    const currentCountries = theCountries.slice(indexOfFirstCountry, indexOfNextPageFirstCountry)//me da un array nuevo, en este caso, desde el 0 hasta el 8 (el slice no incluye el segundo parametro)
+
+    const pagination = (pageNumber)=>{ // va a decir cual es la pagina actual. se lo voy a asar al onclick, para que al hacer click en el numero, me lleve a ese numero de pagina.
+        setCurrentPage(pageNumber)
+    }
+    
     
 
     useEffect(()=>{
@@ -27,9 +44,7 @@ function Home(){
         //console.log(activities)
     },[dispatch]) 
     
-    let countries = useSelector(state=> state.countries)
-    let continents = useSelector(state=> state.continents)
-    let activities = useSelector(state=> state.activities)
+   
     
     //let continentcontinentFiltered = useSelector(state=>state.continentFilteredByContinent)
     
@@ -39,97 +54,57 @@ function Home(){
         e.preventDefault(e);
         //console.log(e)
         dispatch(filteredByContinent(e.target.value))
-        
-        
-        //continentFilter =true;
-        setContinentFilter(true);
-        //continent = e.target.value
-        setContinent(e.target.value)
-        //console.log(continent)
-        //console.log(continentFilter)
-        /* setCurrentPage(1)
-        setOrder(`Ordenado ${e.tarrender.value}`) */
+    
     }
-    console.log(continent)
-    console.log(continentFilter)
+    
 
-    function handleOrder(e){
+    function handleAlphabetOrder(e){
         e.preventDefault(e);
-        continentFilter?dispatch(filteredByContinent(continent, e.target.value)):
-        dispatch(renderAllCountries(e.target.value));
-        
-        
-        /* setCurrentPage(1)
-        setOrder(`Ordenado ${e.tarrender.value}`) */
+        dispatch(orderByAlphabet(e.target.value));
+        setOrder(`ordenado ${e.target.value}`)       
+        setCurrentPage(1)
+
     }
+
+    function handlePopulationOrder(e){
+        e.preventDefault(e);
+        dispatch(orderByPopulation(e.target.value));
+        //console.log(theCountries)
+        setOrder(`ordenado ${e.target.value}`)
+        setCurrentPage(1)
+    }
+
     function handleClick(e){
-        e.preventDefault();
-        dispatch(renderAllCountries(e.target.value));
-        setContinentFilter(false) 
-        
+        e.preventDefault(e);
+        dispatch(renderAllCountries(e.target.value));    
     }
+
     function handleActivityFilter(e){
         e.preventDefault(e);
         //console.log(e)
-        dispatch(filteredByActivity(e.target.value))
-        setContinentFilter(true);
-        
-        //continentFilter =true;
-        //setContinentFilter(true);
-        //continent = e.target.value
-        setContinent(e.target.value)
-        //console.log(continent)
-        //console.log(continentFilter)
-        /* setCurrentPage(1)
-        setOrder(`Ordenado ${e.tarrender.value}`) */
+        dispatch(filteredByActivity(e.target.value)) 
+    }
+
+    function handleReset(e){
+        e.preventDefault(e);
+        dispatch(renderAllCountries(e.target.value))
     }
 
 
 
-
-    
-
-  
-
     return(
         <div>
-            <button value = '' onClick={e=>{handleClick(e)}}> volver a cargar todas las recetas</button>
-            <select onChange={e=>handleOrder(e)}>
-                <option value = 'orderABC=ASC'>A-Z</option>
-                <option value = 'orderABC=DESC'>Z-A</option>
-            </select>
+            <Nav activities={theActivities} continents={theContinents} handleClick={handleClick} handleAlphabetOrder= {handleAlphabetOrder} handlePopulationOrder={handlePopulationOrder} handleContinentFilter={handleContinentFilter} handleActivityFilter={handleActivityFilter} />
+            <SearchBar/>
 
-            <select onChange={e=>handleOrder(e)}>
-            
-                <option value = 'orderPop=ASC'>less </option>
-                <option value = 'orderPop=DESC'>more</option>
-            </select>
+            <h2>PICOUNTRIES</h2>
 
-           {<select onChange={e=>handleContinentFilter(e)}>
-              
-            {continents?.map(c=>{
-                return( <option value ={c.continent} key = {c.continent}>{c.continent}</option> )})}
-            </select>}
+            <Countries countries={currentCountries} handleReset={handleReset} />
+          
 
-            {<select onChange={e=>handleActivityFilter(e)}>
-                <option value = 'todas'> All activities</option>
-            {activities?.map((a,i)=>{
-                return( <option value ={a.aName} key = {i}>{a.aName}</option> )})}
-            </select>}
-
-            PICOUNTRIES
-            {countries?countries.map((c)=>{
-                return (
-                    <Country key={c.id} id={c.id} name={c.cName} flag= {c.flag} continent={c.continent} population = {c.population} area = {c.area}/>
-                )})
-                    
-                :null}
-            {/* {continentcontinentFiltered?continentcontinentFiltered.map((c)=>{
-                return (
-                    <Country key={c.id} id={c.id} name={c.cName} flag= {c.flag} continent={c.continent} population = {c.population} area = {c.area}/>
-                )})
-                    
-                :null} */}
+            <Pagination   countriesPerPage={countriesPerPage}
+                        theCountries = {theCountries.length}
+                        pagination = {pagination}/> 
         </div>
     )
 

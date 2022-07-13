@@ -6,16 +6,23 @@ const getDbCountries = async()=>{
        
     return await Country.findAll({
         include:{
-            model:Activity
+            model:Activity,
+            through: {
+                attributes: []
+            },
         }}
     )
 }
     
  const getCountryDetails = async(id)=>{
      return await Country.findByPk(id, {
-         include:{
-             model:Activity
-            }
+         //attributes:{exclude:[`population`]},
+        include:{
+            model:Activity,
+            through: {
+                attributes: []
+            },
+        }
         
     })
 }

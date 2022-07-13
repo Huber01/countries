@@ -6,13 +6,11 @@ const getCountries=async()=>{
     try{
         let countryInDb = await Country.findAll();
         if(!countryInDb.length){
-
             let url = await axios.get(`https://restcountries.com/v3.1/all`)
-            let countries = url.data;
-        
+            let countries = url.data;        
             let filteredCountries = countries.map((c)=>{
                 return{
-                    id: c.cca3.toLowerCase(),
+                    id: c.cca3,
                     cName: c.name.common,
                     flag: c.flags.svg,
                     continent:  c.continents[0],
@@ -20,6 +18,7 @@ const getCountries=async()=>{
                     subregion: c.subregion,
                     area: c.area,
                     population: c.population,
+                    populationVirtual: c.populationVirtual,
                     unMember: c.unMember,
                     location: c.maps.googleMaps,
                     timezones: c.timezones[0]

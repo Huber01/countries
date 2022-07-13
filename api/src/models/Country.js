@@ -44,13 +44,25 @@ module.exports = (sequelize) => {
     },
     population:{
       type: DataTypes.INTEGER,
-      get(){
+     /*  get(){
         let dots= (number)=>{
            const thousands = /\B(?=(\d{3})+(?!\d))/g;
            return number.toString().replace(thousands, ".") 
        }
         //let value = this.getDataValue('population')
         return dots(this.getDataValue('population'))+' habitants'
+        
+      } */
+    },
+    populationVirtual:{
+      type: DataTypes.VIRTUAL,
+      get(){
+        let dots= (number)=>{
+           const thousands = /\B(?=(\d{3})+(?!\d))/g;
+           return number.toString().replace(thousands, ".") 
+       }
+        //let value = this.getDataValue('population')
+        return dots(this.population)+' habitants'
         
       }
     },

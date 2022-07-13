@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 //const axios = require('axios');
-const {Country, Activity} = require('../db')
-const {Op} = require ('sequelize');
-const { continents, continentFilterAll, continentFilterPop, continentFilterABC} = require ('../controllers/continentFilter')
+///const {Country, Activity} = require('../db')
+//const {Op} = require ('sequelize');
+const { continents, /* continentFilterAll, continentFilterPop, continentFilterABC */} = require ('../controllers/continentFilter')
 
 
 router.get('/', async(req,res,next)=>{
@@ -18,7 +18,7 @@ router.get('/', async(req,res,next)=>{
     }
 })
 
-router.get('/filter', async(req,res,next)=>{
+/* router.get('/filter', async(req,res,next)=>{
     let { name, orderPop, orderABC, continentName, activity } = req.query;
     let countriesByContinent;
     try{
@@ -30,7 +30,7 @@ router.get('/filter', async(req,res,next)=>{
             countriesByContinent = await continentFilterAll(continentName, activity)
         }
 
-   /*      if(name){
+        if(name){
             let countryInContinent = countriesByContinent.map(c=>c.cName).includes(name)
 
             
@@ -38,7 +38,7 @@ router.get('/filter', async(req,res,next)=>{
             countryInContinent?countriesByContinent.map(c=>c.cName).filter(c=>c===name):res.status(404).send(`${name} is not in ${continentName}!`);
 
             res.status(200).json(name)
-        } */
+        }
         let countryList = countriesByContinent.map((c)=>{
             return{
                 id: c.id,
@@ -56,5 +56,5 @@ router.get('/filter', async(req,res,next)=>{
         next(e)
     }
 
-})
+})  */
 module.exports = router

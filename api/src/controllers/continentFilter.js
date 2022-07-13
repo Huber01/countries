@@ -8,7 +8,7 @@ const continents = async()=>{
     })
 };
 
-const continentFilterAll = async(continentName, activity)=>{
+/* const continentFilterAll = async(continentName, activity)=>{
     if (activity){
         return await Country.findAll({
             include:{
@@ -113,14 +113,14 @@ const continentFilterABC = async(continentName, orderABC, activity)=>{
         })
     }
 }
-
+ */
 
 
 
 module.exports = {
     continents,
-    continentFilterAll,
+    /* continentFilterAll,
     continentFilterPop,
-    continentFilterABC
+    continentFilterABC */
 }
 

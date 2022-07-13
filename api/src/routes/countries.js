@@ -7,8 +7,8 @@ const {getDbCountries, getCountryDetails} = require ('../controllers/getDbCountr
 const {alphabetOrder, alphabetDscOrder}= require ('../controllers/orderABC')
 const {orderPopulation, orderPopulationDesc}= require ('../controllers/orderPopulation')
 
-router.get('/?', async(req, res, next)=>{
-    let {name, orderPop, orderABC} = req.query
+router.get('/', async(req, res, next)=>{
+    let {name} = req.query
     let countries;
    
     try{
@@ -17,24 +17,25 @@ router.get('/?', async(req, res, next)=>{
            
             let country = await Country.findAll({
                 include:{
-                    model:Activity
+                    model:Activity,
+                    through: {
+                        attributes: []
+                    },
                 },
                     where:{
                         cName:{
-                            [Op.startsWith]:`${name}`
+                            [Op.iLike]:`%${name}%`
                      },
                     
                 }}
                 
             )
          
-        country.length?res.status(200).json(country):res.status(404).send('no Country matches your search')
-            
-            
-        }else if(orderPop) {
+        res.status(200).json(country)/* :res.status().json(country) */        
+       /*  }else if(orderPop) {
             countries = await orderPopulation(orderPop)
         } else if (orderABC){
-            countries = await alphabetOrder(orderABC)
+            countries = await alphabetOrder(orderABC) */
         }else {
         countries = await getDbCountries();
 
@@ -44,111 +45,25 @@ router.get('/?', async(req, res, next)=>{
             id: c.id,
             cName: c.cName,
             flag: c.flag,
-            continent: c.continent,
-            population:c.population,
+            continent:  c.continent,
+            capital: c.capital,
+            subregion: c.subregion,
+            area: c.area,
+            population: c.population,
+            populationVirtual: c.populationVirtual,
+            unMember: c.unMember,
+            location: c.location,
+            timezones: c.timezones,
             activities: c.activities
-           
-            
-
     }})
     console.log(countryList.length)
-    countryList.length?res.status(200).json(countryList):res.status(404).send('error de conexion')
-
+    //console.log(countryList[id])
+    countryList.length?res.status(200).json(countryList):res.status(404).send('conextion error')
     }catch(e){
         next(e)
     }
 })
 
-
-
-/* router.get('prueba/orderABCascending', async (req,res,next)=>{
-   try{
-    let countries = await alphabetOrder();
-
-        let countryList = countries.map((c)=>{
-            return{
-                id: c.id,
-                cName: c.cName,
-                flag: c.flag,
-                continent: c.continent,
-                population: c.population
-
-        }})
-       
-        countryList.length?res.status(200).json(countryList):res.status(404).send('error de conexion')
-        
-
-    }catch(e){
-        next(e)
-    }
-})
-
-
-router.get('/orderABCdescending', async (req,res,next)=>{
-    try{
-     let countries = await alphabetDscOrder();
- 
-         let countryList = countries.map((c)=>{
-             return{
-                 id: c.id,
-                 cName: c.cName,
-                 flag: c.flag,
-                 continent: c.continent,
-                 population: c.population
- 
-         }})
-        
-         countryList.length?res.status(200).json(countryList):res.status(404).send('error de conexion')
-         
- 
-     }catch(e){
-         next(e)
-     }
- })
-
- router.get('/orderPopAscending', async (req,res,next)=>{
-    try{
-     let countries = await orderPopulationAsc();
- 
-         let countryList = countries.map((c)=>{
-             return{
-                 id: c.id,
-                 cName: c.cName,
-                 flag: c.flag,
-                 continent: c.continent,
-                 population: c.population
- 
-         }})
-        
-         countryList.length?res.status(200).json(countryList):res.status(404).send('error de conexion')
-         
- 
-     }catch(e){
-         next(e)
-     }
- })
-
- router.get('/orderPopDescending', async (req,res,next)=>{
-    try{
-     let countries = await orderPopulationDesc();
- 
-         let countryList = countries.map((c)=>{
-             return{
-                 id: c.id,
-                 cName: c.cName,
-                 flag: c.flag,
-                 continent: c.continent,
-                 population: c.population
- 
-         }})
-        
-         countryList.length?res.status(200).json(countryList):res.status(404).send('error de conexion')
-         
- 
-     }catch(e){
-         next(e)
-     }
- }) */
  
 router.get('/:id', async (req,res,next)=>{
     let { id } = req.params;
