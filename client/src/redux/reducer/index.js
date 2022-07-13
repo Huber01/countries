@@ -1,4 +1,4 @@
-import { RENDER_ALL_COUNTRIES, FILTER_BY_CONTINENT, GET_ALL_CONTINENTS, GET_ACTIVITIES, FILTER_BY_ACTIVITY, ORDER_BY_ALPHABET, ORDER_BY_POPULATION, GET_COUNTRY_BY_NAME, GET_COUNTRY_DETAILS} from "../actions";
+import { RENDER_ALL_COUNTRIES, FILTER_BY_CONTINENT, GET_ALL_CONTINENTS, GET_ACTIVITIES, FILTER_BY_ACTIVITY, ORDER_BY_ALPHABET, ORDER_BY_POPULATION, GET_COUNTRY_BY_NAME, GET_COUNTRY_DETAILS, GET_COUNTRY_NAMES} from "../actions";
 
 const initialState ={
     countries:[],
@@ -8,7 +8,8 @@ const initialState ={
     activityFiltered:false,
     continentFiltered:false,
     filteredCountries:[],
-    countryDetails:{}
+    countryDetails:{},
+    countryNames:[]
     //activity:'',
     //continentFilter:false,
     
@@ -107,7 +108,7 @@ const rootReducer = ( state = initialState, action)=>{
                 countries: orderByAlphabet
             }
         case GET_COUNTRY_BY_NAME:
-                
+
             return{
             ...state,
             countries: action.payload,
@@ -118,6 +119,11 @@ const rootReducer = ( state = initialState, action)=>{
                 ...state,
                 countryDetails: action.payload,
             
+            }
+        case GET_COUNTRY_NAMES:
+            return{
+                ...state,
+                countryNames: action.payload
             }
         default:
             return{...state}

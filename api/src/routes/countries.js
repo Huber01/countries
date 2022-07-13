@@ -56,9 +56,19 @@ router.get('/', async(req, res, next)=>{
             timezones: c.timezones,
             activities: c.activities
     }})
-    console.log(countryList.length)
+    
     //console.log(countryList[id])
     countryList.length?res.status(200).json(countryList):res.status(404).send('conextion error')
+    }catch(e){
+        next(e)
+    }
+})
+
+router.get('/countryNames', async(req,res,next)=>{
+    try{
+        let countries = await getDbCountries()
+        let countryNames = countries.map(c=>c.cName)
+        countryNames.length?res.status(200).json(countryNames):res.status(404).send('conextion error')
     }catch(e){
         next(e)
     }

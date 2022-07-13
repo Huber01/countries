@@ -9,6 +9,7 @@ export const ORDER_BY_POPULATION = 'ORDER_BY_POPULATION'
 export const ORDER_BY_ALPHABET = 'ORDER_BY_ALPHABET'
 export const GET_COUNTRY_BY_NAME ='GET_COUNTRY_BY_NAME'
 export const GET_COUNTRY_DETAILS = 'GET_COUNTRY_DETAILS'
+export const GET_COUNTRY_NAMES = 'GET_COUNTRY_NAMES'
 
 
 export const renderAllCountries = ()=>{
@@ -104,6 +105,20 @@ export const getCountryDetails = (id)=>{
             return dispatch({
                 type: 'GET_COUNTRY_DETAILS',
                 payload: countryDetails.data
+            })
+        }catch(e){
+            console.log(e)
+        }
+    }
+}
+
+export const getCountryNames = ()=>{
+    return async function(dispatch){
+        try{
+            let countryNames = await axios.get(`localhost:3001/countries/countryNames`)
+            return dispatch({
+                type:'GET_COUNTRY_NAMES',
+                payload: countryNames.data
             })
         }catch(e){
             console.log(e)
