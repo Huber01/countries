@@ -61,8 +61,9 @@ function Home(){
     function handleAlphabetOrder(e){
         e.preventDefault(e);
         dispatch(orderByAlphabet(e.target.value));
-        setOrder(`ordenado ${e.target.value}`)       
+        setOrder(`ordenado ${e.target.value}`)  
         setCurrentPage(1)
+        
 
     }
 
@@ -76,7 +77,8 @@ function Home(){
 
     function handleClick(e){
         e.preventDefault(e);
-        dispatch(renderAllCountries(e.target.value));    
+        dispatch(renderAllCountries(e.target.value)); 
+          
     }
 
     function handleActivityFilter(e){
@@ -97,7 +99,7 @@ function Home(){
             <Nav activities={theActivities} continents={theContinents} handleClick={handleClick} handleAlphabetOrder= {handleAlphabetOrder} handlePopulationOrder={handlePopulationOrder} handleContinentFilter={handleContinentFilter} handleActivityFilter={handleActivityFilter} />
             <SearchBar/>
 
-            <h2>PICOUNTRIES</h2>
+            <h2>COUNTRIES OF THE WORLD</h2>
 
             <Countries countries={currentCountries} handleReset={handleReset} />
           

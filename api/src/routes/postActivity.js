@@ -5,6 +5,8 @@ const {Activity, Country}= require ('../db')
 router.post('/', async(req,res,next)=>{
 	let { aName, difficulty, duration, season, country} = req.body;
     try{
+		if(!aName || !difficulty || !duration || !season || !country)
+		return res.status(404).send('Must fill in all data')
       const activity = await Activity.create({
 				aName,
 				difficulty,

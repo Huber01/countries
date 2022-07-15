@@ -15,6 +15,7 @@ export default function SearchBar() {
 
   const handleSearchName = (e) => {
     e.preventDefault();
+    country ===''?alert('must introduce values for search'):
     dispatch(getCountryByName(country));
     setCountry('');
   };

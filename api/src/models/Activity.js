@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false
     },
-  aName: {
+    aName:{
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -27,7 +27,8 @@ module.exports = (sequelize) => {
       allowNull:false
     },
     season:{
-      type: DataTypes.ENUM('summer', 'spring', 'autumn', 'winter'),
+      //type: DataTypes.ENUM('summer', 'spring', 'autumn', 'winter'),
+      type: DataTypes.STRING,
       allowNull:false
     }
   },{timestamps:false})

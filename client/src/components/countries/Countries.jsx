@@ -2,7 +2,7 @@ import React from 'react'
 import Country from '../Country/Country'
 
 export default function Countries({countries, handleReset}){
-    console.log(countries.length)
+    
     return(
         <div>
              {countries.length>0?
