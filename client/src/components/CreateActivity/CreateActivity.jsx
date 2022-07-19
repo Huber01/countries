@@ -172,7 +172,7 @@ export default function CreateActivity() {
             </Link>
         </div>
     <div className={styles.DivPadre}>
-        <h1 className={styles.title}>CreateActivity</h1>
+        <h1 className={styles.title}>Create your activity</h1>
         <form onSubmit = {e=>handleSubmit(e)}>
             <div className={styles.DivFormPadre}>
             <div className={styles.FormTitle}>
@@ -211,7 +211,7 @@ export default function CreateActivity() {
             
 
                
-                <select  className={errors.duration ? styles.danger : styles.green} 
+                <select  className={styles.TitleForm} 
                 value={durationMeasure} onChange={(e)=>handleDurationMeasure(e)}>
                 <option defaultValue={null}>Measure duration in...</option>
                     <option value ={'minute/s'} >minute/s</option>
@@ -238,13 +238,13 @@ export default function CreateActivity() {
                     <option value ={'spring'}>spring</option>
                 </select>
             </div>
-            {errors.season ? (
+            {errors.season ? ( 
                     <p className={styles.danger}>{errors.season}</p>
                 ) :null}
             <div className={styles.FormTitle}>
-            <label className={styles.TitleForm}>Where can you do this activity?</label>
+            <label className={styles.TitleForm}>Where can you do this activity?</label><br></br><br></br>
             <select className={errors.country? styles.danger : styles.green} value={input.country} onChange={(e) => handleCountries(e)}>
-                <option defaultValue={null} >Where can you do this?</option>
+             <option className={styles.FormTitle} defaultValue={null} >Where can you do this?</option>
                     {countryNames?.map((c)=>{
                         return(
                             <option value = {c.cName} key={c.id}>{c.cName}</option>

@@ -66,7 +66,7 @@ p.danger {
   border: 3px solid rgb(255, 255, 255);
   grid-column:1/3;
   grid-row: 2/2;
-  width: auto;
+  width: 75%;
   height: auto;
   display: grid;
   grid-template-columns: repeat(2, 4fr);
@@ -75,6 +75,7 @@ p.danger {
 
 .contNavBarPadre{
   background-color: transparent;
+  width:50%;
   display: flex ;
   justify-content: center;
   position: relative;
@@ -111,14 +112,16 @@ form{
   grid-row: 1;
 }
 .title{
-    grid-column: 1 / 5;
+    grid-column: 1/4;    
+    
     
 }
 .FormTitle{
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
+  padding:10px;
 }
 .TitleForm{
   justify-content: flex-start;
@@ -132,3 +135,78 @@ form{
   box-shadow: 5px 2px 2px 1px rgba(0, 0, 0, 0.2);
   left: 10px;
 }
+.FormTitle select{
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border: solid black;
+    padding: 8px 5px 8px 5px;
+    box-shadow: 5px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    left: 10px;
+  }
+
+  .FormTitle option{
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border: solid black;
+    padding: 8px 5px 8px 5px;
+    box-shadow: 5px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    left: 10px;
+  }
+.CardEjemplo{
+    background: rgba(255,255,255,1);
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    border-radius: 25px;
+    backdrop-filter: blur(5px);
+    border: 3px solid rgb(255, 255, 255);
+    grid-column:3/5;
+    grid-row: 2/5;
+  }
+  .imgDefault{
+    width: 15rem;
+    height: 200;
+    border-radius: 10px;
+  }
+  
+  .cardText{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;    
+      margin-top: 5px;
+      margin-bottom: 0px;
+      margin-right: 2px;
+      margin-left: 2px;
+      text-decoration: none;
+  
+  }
+  
+  .card{  
+    display: flex;
+    flex-direction: column;
+    width: 15rem; 
+    background-color: rgb(255, 255, 255);
+    /* ver si la heigth conviene que sea "auto" */
+    height: auto;
+    align-items: center;
+    border-style: none;
+    background-size:cover;
+    border-radius: 10px;
+    transition: transform .5s;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-right: 2px;
+    margin-left: 2px;
+    background-color: rgba(255, 255, 255, 0.767);
+    text-decoration: none;
+    box-shadow: 5px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  }  
+  .card:hover{
+    transform: scale(1.1);
+  }
+  
+  .imgCard{
+    width: 15rem;
+    height: 200;
+    border-radius: 10px;
+  }
