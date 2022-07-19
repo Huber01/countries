@@ -28,7 +28,7 @@ export default function CountryDetail() {
   return (
     <div className={styles.background} >
         
-            <Link to={'/'}>
+            <Link to={'/home'}>
                 <button className={styles.button} onClick={showWorld}>Back to Rest of the world</button>
             </Link> 
               

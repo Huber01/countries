@@ -167,7 +167,7 @@ export default function CreateActivity() {
   return (
     <div className={styles.background}>
         <div className={styles.contNavBarPadre}>
-            <Link to={'/'}>
+            <Link to={'/home'}>
                 <button>Back to Rest of the world</button>
             </Link>
         </div>
