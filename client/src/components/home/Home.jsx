@@ -7,6 +7,8 @@ import Nav from '../nav/Nav';
 import Pagination from '../pagination/Pagination'
 import Countries from '../countries/Countries';
 import SearchBar from '../SearchBar/SearchBar';
+import styles from './home.module.css'
+
 
 //import { renderAllRecipes, renderAllDiets, continentFilterRecipesByDiet, continentFilterCreatedRecipes, orderByABC, orderByHealth} from '../../redux/actions';
 //import { Link } from 'react-router-dom';
@@ -26,7 +28,7 @@ function Home(){
     //const [selected, setSelected]=
 
     const [currentPage, setCurrentPage]= useState(1);
-    const [countriesPerPage, setCountriesPerPage]= useState(9);
+    const [countriesPerPage, setCountriesPerPage]= useState(10);
     const indexOfNextPageFirstCountry = currentPage * countriesPerPage;//es la ultima receta, hasta donde llega el corte. es decir que es la primera que se muestra en la prixma pagina
     const indexOfFirstCountry = indexOfNextPageFirstCountry - countriesPerPage;// arranca por el 0
     const currentCountries = theCountries.slice(indexOfFirstCountry, indexOfNextPageFirstCountry)//me da un array nuevo, en este caso, desde el 0 hasta el 8 (el slice no incluye el segundo parametro)
@@ -95,11 +97,11 @@ function Home(){
 
 
     return(
-        <div>
+        <div className={styles.background} >
             <Nav activities={theActivities} continents={theContinents} handleClick={handleClick} handleAlphabetOrder= {handleAlphabetOrder} handlePopulationOrder={handlePopulationOrder} handleContinentFilter={handleContinentFilter} handleActivityFilter={handleActivityFilter} />
-            <SearchBar/>
+            <SearchBar/><br></br>
 
-            <h2>COUNTRIES OF THE WORLD</h2>
+            <button className={styles.title} onClick={(e)=>handleClick(e)}>COUNTRIES OF THE WORLD</button>
 
             <Countries countries={currentCountries} handleReset={handleReset} />
           

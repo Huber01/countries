@@ -14,7 +14,7 @@ function App() {
          {/*  <Route path ='/' exact element={ <LandingPage/> }/> */}
           <Route path = '/' element={ <Home/> }/>
           <Route path = '/create' element={ <CreateActivity/> }/>
-          <Route  path = '/home/:id' exact element= {<CountryDetails/>} /> 
+          <Route  path = '/:id' element= {<CountryDetails/>} /> 
         </Routes>
     </BrowserRouter>
   </center>

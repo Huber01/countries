@@ -1,10 +1,13 @@
 import React from 'react'
 import Country from '../Country/Country'
+import styles from './countries.module.css'
+
 
 export default function Countries({countries, handleReset}){
-    
+  
     return(
-        <div>
+        <div className={styles.background}>
+            
              {countries.length>0?
                 countries.map((c)=>{
                 return (
@@ -14,6 +17,7 @@ export default function Countries({countries, handleReset}){
             :<div>
                 <h4>no match</h4>
                 <button value = '' onClick={e=>{handleReset(e)}}>Reset Filters</button></div>}
+                
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getActivities, createActivity, renderAllCountries} from '../../redux/actions'
 import { Link } from 'react-router-dom';
 import { validateCountry, validateDifficulty, validateDuration, validateName, validateSeason, isEmpty, errorExists } from '../validation/validation';
-
+import styles from './createActivity.module.css'
 
 export default function CreateActivity() {
 
@@ -165,97 +165,120 @@ export default function CreateActivity() {
     }
 
   return (
-    <div>
-         <Link to={'/'}>
-            <button>Back to Rest of the world</button>
-        </Link>
-        <div>CreateActivity</div>
+    <div className={styles.background}>
+        <div className={styles.contNavBarPadre}>
+            <Link to={'/'}>
+                <button>Back to Rest of the world</button>
+            </Link>
+        </div>
+    <div className={styles.DivPadre}>
+        <h1 className={styles.title}>CreateActivity</h1>
         <form onSubmit = {e=>handleSubmit(e)}>
-        <div>
-            <label>Name: </label>
-            <input type={'text'} name={'aName'} value={input.aName} placeholder = 'Activity Name'
-            onChange={(e) => handleNameChange(e)}/>
-            {/* <button onClick={checkActivity}>check if it already exists</button> */}
-            {errors.aName ? (
-                <p >{errors.aName}</p>
-              ) :null}
-        </div>
-        <div>
-            <label>Difficulty: </label>
-            <input type={'number'} name={'difficulty'} value={input.difficulty} placeholder = 'Difficulty from 1-5'
-            onChange={(e) => handleDifficultyChange(e)}/>
-            {errors.difficulty ? (
-                <p >{errors.difficulty}</p>
-              ) :null}
-        </div>
-        <div>
-            <label>Duration: </label>
-            <input type={'number'} name={'duration'} value={durationTime} placeholder = 'Activity duration'
-            onChange={(e)=>handleDurationTime(e)}/>
-            
-            <select value={durationMeasure} onChange={(e)=>handleDurationMeasure(e)}>
-            <option defaultValue={null}>Measure duration in...</option>
-                <option value ={'minute/s'} >minute/s</option>
-                <option value ={'hour/s'}>hour/s</option>
-                <option value ={'day/s'}>day/s</option>
-                <option value ={'week/s'}>week/s</option>
-                <option value ={'month/s'}>month/s</option>
-                <option value ={'year/s'}>year/s</option> 
-            </select>
-            
-        </div>
-        {errors.duration ? (
-                <p >{errors.duration}</p>
-              ) :null}
-
-        <div>
-            <label>Season: </label>
-            <select value={input.season} onChange={(e) => handleSeason(e)}>
-                <option defaultValue={null}>What time of the year?</option>
-                <option value ={'summer'}>summer</option>
-                <option value ={'autumn'}>autumn</option>
-                <option value ={'winter'}>winter</option>
-                <option value ={'spring'}>spring</option>
-            </select>
-        </div>
-        {errors.season ? (
-                <p >{errors.season}</p>
-              ) :null}
-        <label>Where can you do this activity?</label>
-        <select  value={input.country} onChange={(e) => handleCountries(e)}>
-            <option defaultValue={null} >Where can you do this?</option>
-                {countryNames?.map((c)=>{
-                    return(
-                        <option value = {c.cName} key={c.id}>{c.cName}</option>
-                    )
-                })}
-        </select> 
-        {errors.country ? (
-                <p >{errors.country}</p>
-              ) :null}
-
-        <br/>
-        <button type={'submit'}>Create activity</button>
-        {fieldErrors?(
-                    <p>{errors.PostError}</p>
+            <div className={styles.DivFormPadre}>
+            <div className={styles.FormTitle}>
+                <label className={styles.TitleForm}>Name: </label>
+                <input className={errors.aName ? styles.danger : styles.green}
+                type={'text'} 
+                name={'aName'} 
+                value={input.aName} 
+                placeholder = 'Activity Name'
+                onChange={(e) => handleNameChange(e)}/>
                 
-            ):null}
+                {errors.aName ? (
+                    <p className={styles.danger}>{errors.aName}</p>
+                ) :null}
+            </div>
+            <div className={styles.FormTitle}>
+                <label className={styles.TitleForm}>Difficulty: </label>
+                <input className={errors.difficulty ? styles.danger : styles.green}
+                type={'number'} 
+                name={'difficulty'} 
+                value={input.difficulty} 
+                placeholder = 'Difficulty from 1-5'
+                onChange={(e) => handleDifficultyChange(e)}/>
+                {errors.difficulty ? (
+                    <p className={styles.danger}>{errors.difficulty}</p>
+                ) :null}
+            </div>
+            <div className={styles.FormTitle}>
+                <label className={styles.TitleForm}>Duration: </label>
+                <input className={errors.duration ? styles.danger : styles.green}
+                type={'number'} 
+                name={'duration'} 
+                value={durationTime} 
+                placeholder = 'Activity duration'
+                onChange={(e)=>handleDurationTime(e)}/>
+            
+
+               
+                <select  className={errors.duration ? styles.danger : styles.green} 
+                value={durationMeasure} onChange={(e)=>handleDurationMeasure(e)}>
+                <option defaultValue={null}>Measure duration in...</option>
+                    <option value ={'minute/s'} >minute/s</option>
+                    <option value ={'hour/s'}>hour/s</option>
+                    <option value ={'day/s'}>day/s</option>
+                    <option value ={'week/s'}>week/s</option>
+                    <option value ={'month/s'}>month/s</option>
+                    <option value ={'year/s'}>year/s</option> 
+                </select>
+               
+            </div>   
+            
+            {errors.duration ? (
+                    <p className={styles.danger}>{errors.duration}</p>
+                ) :null}
+
+            <div className={styles.FormTitle}>
+                <label className={styles.TitleForm}>Season: </label>
+                <select className={errors.season ? styles.danger : styles.green} value={input.season} onChange={(e) => handleSeason(e)}>
+                    <option defaultValue={null}>What time of the year?</option>
+                    <option value ={'summer'}>summer</option>
+                    <option value ={'autumn'}>autumn</option>
+                    <option value ={'winter'}>winter</option>
+                    <option value ={'spring'}>spring</option>
+                </select>
+            </div>
+            {errors.season ? (
+                    <p className={styles.danger}>{errors.season}</p>
+                ) :null}
+            <div className={styles.FormTitle}>
+            <label className={styles.TitleForm}>Where can you do this activity?</label>
+            <select className={errors.country? styles.danger : styles.green} value={input.country} onChange={(e) => handleCountries(e)}>
+                <option defaultValue={null} >Where can you do this?</option>
+                    {countryNames?.map((c)=>{
+                        return(
+                            <option value = {c.cName} key={c.id}>{c.cName}</option>
+                        )
+                    })}
+            </select> 
+            </div>
+            {errors.country ? (
+                    <p className={styles.danger}>{errors.country}</p>
+                ) :null}
+
+            <br/>
+            <button type={'submit'}>Create activity</button>
+           
+        </div>
         </form>
-        
-        <div>
-            <p>This is your activity so far....</p>
-            {input.aName !== ''&&!errors.aName?<p>Name: {input.aName}</p>:null}
-            {input.difficulty!==''&&!errors.difficulty?<p>Difficulty: {input.difficulty}</p>:null}
-            {input.season!==''&&!errors.season?<p>Season: {input.season}</p>:null}
-            {input.duration!==''&&!errors.duration?<p>Duration: {input.duration}</p>:null}
-            {input.country?.map((e)=>{
-                return(
-                    <div key={e}>  {e}
-                        <button onClick={()=>handleDelete(e)}> x </button>
-                    </div>
-                )})}
-        
     </div>
+        
+        {!emptyInput?<div className={styles.card}>
+            <div className={styles.cardText}>
+                <p className={styles.titleCards}>This is your activity so far....</p>
+                {input.aName !== ''&&!errors.aName?<p className={styles.titleCards}>Name: {input.aName}</p>:null}
+                {input.difficulty!==''&&!errors.difficulty?<p className={styles.ps}>Difficulty: {input.difficulty}</p>:null}
+                {input.season!==''&&!errors.season?<p className={styles.ps}>Season: {input.season}</p>:null}
+                {input.duration!==''&&!errors.duration?<p className={styles.ps}>Duration: {input.duration}</p>:null}
+                {input.country?.map((e)=>{
+                    return(
+                        <div className={styles.ps} key={e}>  {e}
+                            <button onClick={()=>handleDelete(e)}> x </button>
+                        </div>
+                    )})}
+                
+            </div>
+    </div>:null}
     </div>
   )
 }

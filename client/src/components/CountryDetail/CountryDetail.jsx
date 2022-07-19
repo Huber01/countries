@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom'
 import unIcon from '../../images/unIcon.png'
 import gMaps from '../../images/gMapsIcon.png'
 import {Link} from 'react-router-dom'
+import styles from './countryDetail.module.css'
 
 
 export default function CountryDetail() {
@@ -25,40 +26,49 @@ export default function CountryDetail() {
 
     
   return (
-    <div>
-        <Link to={'/'}>
-            <button onClick={showWorld}>Back to Rest of the world</button>
-        </Link>
-        <div>
-            <h2>{countryDetails.cName} - {countryDetails.id}</h2>
-            <img classname = {'cardFlag'} src ={countryDetails.flag} alt = 'country flag' width='40px' height='20px'/><br/>
-            <p>CAPITAL: {countryDetails.capital}</p>
-            <p>CONTINENT: {countryDetails.continent}</p>
-            <p>TIMEZONE: {countryDetails.timezones}</p>
-            {countryDetails.subregion? <p>SUBREGION: {countryDetails.subregion}</p>:null}
-            <p>AREA: {countryDetails.area}</p>
-            <p>POPULATION: {countryDetails.populationVirtual}</p>
-            <a href={countryDetails.location} target="_blank" rel="noopener noreferrer" ><img src={gMaps} alt = 'UN SYMBOL'  width='30px' height='30px'/></a><br/><br/>
-            {countryDetails.unMember? <a href='https://www.un.org/en/about-us/member-states' target="_blank" rel="noopener noreferrer" > <img src = {unIcon} alt = 'UN SYMBOL'  width='30px' height='30px'/></a>:null}
-            
-        </div><br/><br/><br/>
-     { countryDetails.activities?.length?countryDetails.activities?.map(a=>(
-            <div key = {a.id}>
-                <h2>{a.aName}</h2>
-                <p>Difficulty: {a.difficulty}</p>
-                <p>Duration: {a.duration}</p>
-                <p>Season: {a.season}</p>
-            </div>)):
-            <div>
-                'No activities associated...yet'<br/>
-                <Link to={'/create'}><button >CREATE ACTIVITIES FOR THIS COUNTRY</button></Link>
-            </div>
+    <div className={styles.background} >
         
+            <Link to={'/'}>
+                <button className={styles.button} onClick={showWorld}>Back to Rest of the world</button>
+            </Link> 
+            <div className={styles.fatherDiv}>    
+            <div className={styles.divCont}>
+                <h2>{countryDetails.cName} - {countryDetails.id}</h2>
+                <img classname = {styles.flag} src ={countryDetails.flag} alt = 'country flag' /* width='40px' height='20px' *//><br/>
+                <p>CAPITAL: {countryDetails.capital}</p>
+                <p>CONTINENT: {countryDetails.continent}</p>
+                <p>TIMEZONE: {countryDetails.timezones}</p>
+                {countryDetails.subregion? <p>SUBREGION: {countryDetails.subregion}</p>:null}
+                <p>AREA: {countryDetails.area}</p>
+                <p>POPULATION: {countryDetails.populationVirtual}</p>
+                        <a className={styles.ico} href={countryDetails.location} target="_blank" rel="noopener noreferrer" ><img  src={gMaps} alt = 'UN SYMBOL'  width='30px' height='30px'/></a><br/><br/>
+                {countryDetails.unMember? <a className={styles.ico} href='https://www.un.org/en/about-us/member-states' target="_blank" rel="noopener noreferrer" > <img  src = {unIcon} alt = 'UN SYMBOL'  width='30px' height='30px'/></a>:null}
+                
+            </div>
+        { countryDetails.activities?.length?countryDetails.activities?.map(a=>(
+            <div className={styles.activities}>
+                <ul>
+                   
+                        <div key = {a.id}>
+                            <h2>{a.aName}</h2>
+                            <p>Difficulty: {a.difficulty}</p>
+                            <p>Duration: {a.duration}</p>
+                            <p>Season: {a.season}</p>
+                        </div>
+                    
+                </ul>
+            </div>)):
+                <div>
+                    'No activities associated...yet'<br/>
+                    <Link to={'/create'}><button >CREATE ACTIVITIES FOR THIS COUNTRY</button></Link>
+                </div>
             
-     
+                
+            
 
-     }
+        }
 
+        </div>
     </div>
     
   )
