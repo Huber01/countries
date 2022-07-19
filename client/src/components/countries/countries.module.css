@@ -17,9 +17,9 @@
 .card {
     display: flex;
     flex-direction: column;
-    width: 15rem; 
+    width: 25rem; 
     /* ver si la heigth conviene que sea "auto" */
-    height: 40%;
+    height: auto;
     align-items: center;
     border-style: none;
     background-size:cover;

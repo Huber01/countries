@@ -16,7 +16,7 @@ export default function Countries({countries, handleReset}){
                     
             :<div>
                 <h4>no match</h4>
-                <button value = '' onClick={e=>{handleReset(e)}}>Reset Filters</button></div>}
+                <button value = '' onClick={e=>{handleReset(e)}}>Reset !</button></div>}
                 
         </div>
     )

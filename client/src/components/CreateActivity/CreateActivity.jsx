@@ -263,9 +263,9 @@ export default function CreateActivity() {
         </form>
     </div>
         
-        {!emptyInput?<div className={styles.card}>
+        <div className={styles.card}>
             <div className={styles.cardText}>
-                <p className={styles.titleCards}>This is your activity so far....</p>
+                <h1 className={styles.titleCards}>Preview</h1>
                 {input.aName !== ''&&!errors.aName?<p className={styles.titleCards}>Name: {input.aName}</p>:null}
                 {input.difficulty!==''&&!errors.difficulty?<p className={styles.ps}>Difficulty: {input.difficulty}</p>:null}
                 {input.season!==''&&!errors.season?<p className={styles.ps}>Season: {input.season}</p>:null}
@@ -278,7 +278,7 @@ export default function CreateActivity() {
                     )})}
                 
             </div>
-    </div>:null}
+    </div>
     </div>
   )
 }

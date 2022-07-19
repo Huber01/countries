@@ -1,7 +1,7 @@
 import  React, {useState} from 'react';
 import {Link} from 'react-router-dom'
 import styles from './nav.module.css'
-import {BsPeopleFill} from "react-icons/bs"
+
 
 
 //import { useEffect, useState} from 'react';
@@ -33,7 +33,7 @@ export default function Nav({activities, continents, handleClick, handleAlphabet
             </div>
             
             <div className={styles.filterPop}>
-                <BsPeopleFill color='#fff'/>
+               
                 <select className = {styles.dropbtn} value={dropDown} onChange={e=>handlePopulationOrder(e)}>
                     <option defaultValue={''}>Population Order</option>
                     <option value = 'asc'>ascendant population </option>

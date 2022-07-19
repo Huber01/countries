@@ -24,11 +24,11 @@ function Home(){
     let theActivities = useSelector(state=> state.activities)
     
 
-    const [order, setOrder]=useState('')
+    const [ setOrder]=useState('')
     //const [selected, setSelected]=
 
     const [currentPage, setCurrentPage]= useState(1);
-    const [countriesPerPage, setCountriesPerPage]= useState(10);
+    const [countriesPerPage]= useState(10);
     const indexOfNextPageFirstCountry = currentPage * countriesPerPage;//es la ultima receta, hasta donde llega el corte. es decir que es la primera que se muestra en la prixma pagina
     const indexOfFirstCountry = indexOfNextPageFirstCountry - countriesPerPage;// arranca por el 0
     const currentCountries = theCountries.slice(indexOfFirstCountry, indexOfNextPageFirstCountry)//me da un array nuevo, en este caso, desde el 0 hasta el 8 (el slice no incluye el segundo parametro)

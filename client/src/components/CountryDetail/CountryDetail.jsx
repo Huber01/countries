@@ -31,7 +31,7 @@ export default function CountryDetail() {
             <Link to={'/'}>
                 <button className={styles.button} onClick={showWorld}>Back to Rest of the world</button>
             </Link> 
-            <div className={styles.fatherDiv}>    
+              
             <div className={styles.divCont}>
                 <h2>{countryDetails.cName} - {countryDetails.id}</h2>
                 <img classname = {styles.flag} src ={countryDetails.flag} alt = 'country flag' /* width='40px' height='20px' *//><br/>
@@ -45,31 +45,28 @@ export default function CountryDetail() {
                 {countryDetails.unMember? <a className={styles.ico} href='https://www.un.org/en/about-us/member-states' target="_blank" rel="noopener noreferrer" > <img  src = {unIcon} alt = 'UN SYMBOL'  width='30px' height='30px'/></a>:null}
                 
             </div>
+        <div className={styles.activities}>
         { countryDetails.activities?.length?countryDetails.activities?.map(a=>(
-            <div className={styles.activities}>
-                <ul>
-                   
-                        <div key = {a.id}>
-                            <h2>{a.aName}</h2>
-                            <p>Difficulty: {a.difficulty}</p>
-                            <p>Duration: {a.duration}</p>
-                            <p>Season: {a.season}</p>
+                  
+                        <div className={styles.card} key = {a.id}>
+                            
+                            <h2 className={styles.title}>{a.aName}</h2>
+                            <p className={styles.text}>Difficulty: {a.difficulty}</p>
+                            <p className={styles.text}>Duration: {a.duration}</p>
+                            <p className={styles.text}>Season: {a.season}</p>
+                            
                         </div>
-                    
-                </ul>
-            </div>)):
-                <div>
-                    'No activities associated...yet'<br/>
+ 
+                )):
+                <div className={styles.noActivities}>
+                    <p className={styles.title}>No activities associated...yet</p><br/>
                     <Link to={'/create'}><button >CREATE ACTIVITIES FOR THIS COUNTRY</button></Link>
-                </div>
-            
-                
-            
+                </div>  
 
         }
-
+</div>
         </div>
-    </div>
+    
     
   )
 }
