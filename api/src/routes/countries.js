@@ -57,7 +57,7 @@ router.get('/', async(req, res, next)=>{
             activities: c.activities
     }})
     
-    //console.log(countryList[id])
+   
     countryList.length?res.status(200).json(countryList):res.status(404).send('conextion error')
     }catch(e){
         next(e)
@@ -77,7 +77,7 @@ router.get('/countryNames', async(req,res,next)=>{
  
 router.get('/:id', async (req,res,next)=>{
     let { id } = req.params;
-    //id = id.toLowerCase()
+    
     try{
         let details = await getCountryDetails(id);
         details?res.status(200).json(details):res.status(404).send('an error has ocurred')
