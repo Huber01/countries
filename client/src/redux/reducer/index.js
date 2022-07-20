@@ -41,25 +41,32 @@ const rootReducer = ( state = initialState, action)=>{
         case FILTER_BY_ACTIVITY:
             const activityCountries = state.continentFiltered?state.filteredCountries:state.allCountries
             let filteredByActivity
-            if(action.payload === 'All'){
+            if(action.payload === 'All' && !state.activityFiltered){
                 filteredByActivity =state.allCountries
-            }else{
+            } else if(action.payload === 'All') {
+                filteredByActivity = activityCountries
+            }else {
                 filteredByActivity = activityCountries.filter(c=>c.activities.map(a=>a.aName).includes(action.payload))}
             return{
                 ...state,
                 countries: filteredByActivity,
                 filteredCountries: filteredByActivity,
-                activityFiltered: true
-                
+                activityFiltered: true  
             }
         case FILTER_BY_CONTINENT:
             const continentCountries = state.activityFiltered?state.filteredCountries:state.allCountries
-            const filteredByContinent = action.payload === 'All' ?state.allCountries:continentCountries.filter(c=>c.continent.includes(action.payload))
+            let filteredByContinent 
+            if(action.payload === 'All'&& !state.activityFiltered ){
+                filteredByContinent = state.allCountries
+            } else if(action.payload === 'All') {
+                filteredByContinent = continentCountries
+            }else{
+                filteredByContinent = continentCountries.filter(c=>c.continent.includes(action.payload))}
             return{
                 ...state,
                 countries: filteredByContinent,
                 filteredCountries: filteredByContinent,
-                continentFiltered:true
+                continentFiltered: true
             }
         case ORDER_BY_POPULATION: 
             const orderedByPopulation = 

@@ -87,11 +87,11 @@ export const orderByPopulation = (payload)=>{
 export const getCountryByName = (country)=> {
     return async function (dispatch) {
         try{
-        var countryByName= await axios.get(`http://localhost:3001/countries?name=${country}`) //hago el pedido a mi back =======>conexion con el back<=======
+        var countryByName= await axios.get(`http://localhost:3001/countries?name=${country}`) 
      
         return dispatch ({
         type: 'GET_COUNTRY_BY_NAME',
-        payload: countryByName.data // el axios devuelve el.data
+        payload: countryByName.data 
     })} catch(e){
         console.log(e)
         }

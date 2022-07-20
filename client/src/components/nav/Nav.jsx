@@ -10,7 +10,7 @@ import styles from './nav.module.css'
 //import Country from '../Country/Country';
 
 
-export default function Nav({activities, continents, handleClick, handleAlphabetOrder, handlePopulationOrder, handleContinentFilter, handleActivityFilter}){
+export default function Nav({activities, continents, handleAlphabetOrder, handlePopulationOrder, handleContinentFilter, handleActivityFilter}){
 
     let[dropDown]=useState('')
 
@@ -23,7 +23,7 @@ export default function Nav({activities, continents, handleClick, handleAlphabet
             <Link to={'/create'}>
                 <button className={styles.button} >Create an activity!</button>
             </Link>
-           {/*  <button className={styles.button} value = '' onClick={e=>{handleClick(e)}}>Load all Countries again</button> */}
+          
             <div  >
                 <select className = {styles.dropbtn}value={dropDown} onChange={e=>handleAlphabetOrder(e)}>
                     <option defaultValue={''}>Alphabet Order</option>

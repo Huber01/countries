@@ -15,7 +15,7 @@ export default function Countries({countries, handleReset}){
                 )})
                     
             :<div>
-                <h4>no match</h4>
+                <h2>NO MATCH</h2>
                 <button value = '' onClick={e=>{handleReset(e)}}>Reset !</button></div>}
                 
         </div>

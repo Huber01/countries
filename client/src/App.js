@@ -10,12 +10,12 @@ function App() {
   return (
 
     <center>
-      <BrowserRouter>
+    <BrowserRouter>
       <Routes>
           <Route path ='/' exact element={ <LandingPage/> }/>
           <Route path = '/home' element={ <Home/> }/>
           <Route path = '/create' element={ <CreateActivity/> }/>
-          <Route  path = '/:id' element= {<CountryDetails/>} /> 
+          <Route path = '/:id' element= {<CountryDetails/>} /> 
         </Routes>
     </BrowserRouter>
   </center>
