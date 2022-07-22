@@ -21,15 +21,16 @@ function Home(){
     const [order, setOrder]=useState('')//definir ordenamientos
     const [currentPage, setCurrentPage]= useState(1);
     const [countriesPerPage]= useState(10);
+    const [pageLimit, setPageLimit] = useState(1) 
     const indexOfNextPageFirstCountry = currentPage * countriesPerPage;
     const indexOfFirstCountry = indexOfNextPageFirstCountry - countriesPerPage;// arranca por el 0
     const currentCountries = theCountries.slice(indexOfFirstCountry, indexOfNextPageFirstCountry)
+    const pageNumbers = Math.ceil(theCountries.length/countriesPerPage)
+    
     const pagination = (pageNumber)=>{ 
         setCurrentPage(pageNumber)
     }
     
-
-   
     const nextPage = () => {
         setCurrentPage((page) => page + 1);
      }
@@ -38,7 +39,11 @@ function Home(){
         setCurrentPage((page) => page - 1);
      } 
 
-  
+    const getPages = () => {
+    pageNumbers<5?setPageLimit(pageNumbers):setPageLimit(5)
+    let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+    return new Array(pageLimit).fill().map((_, i) => start + i + 1);
+  } 
     
     useEffect(()=>{
         dispatch(renderAllCountries(''));
@@ -96,14 +101,23 @@ function Home(){
         <div className={styles.background} >
             
             <Nav activities={theActivities} continents={theContinents} handleClick={handleClick} handleAlphabetOrder= {handleAlphabetOrder} handlePopulationOrder={handlePopulationOrder} handleContinentFilter={handleContinentFilter} handleActivityFilter={handleActivityFilter} />
+           
             <SearchBar/><br></br>
 
             <button className={styles.title} onClick={(e)=>handleClick(e)}>COUNTRIES OF THE WORLD {filtered?<p>click to reload</p>:null}</button>
-
+            <Pagination pageNumbers = {pageNumbers}
+                        getPages={getPages}
+                        currentPage={currentPage}
+                        nextPage = {nextPage}
+                        previousPage = {previousPage}
+                        countriesPerPage={countriesPerPage}
+                        theCountries = {theCountries.length}
+                        pagination = {pagination}/> 
             <Countries countries={currentCountries} handleReset={handleReset} />
           
 
-            <Pagination 
+            <Pagination pageNumbers = {pageNumbers}
+                        getPages={getPages}
                         currentPage={currentPage}
                         nextPage = {nextPage}
                         previousPage = {previousPage}

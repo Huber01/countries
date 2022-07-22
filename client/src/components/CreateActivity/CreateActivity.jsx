@@ -115,14 +115,22 @@ export default function CreateActivity() {
 
     let handleCountries = (e)=> {
         e.preventDefault();
-        setInput({
-          ...input,
-          country: [...input.country, e.target.value]
-        })
+        if(!input.country.includes(e.target.value)){
+            setInput({
+                ...input,
+                country:[...input.country, e.target.value]
+            })
+        } else{
+            setInput({
+              ...input,
+              country: [...input.country]
+            })
+        }
+      
         const newError = validateCountry({
             ...input,
             country: e.target.value
-          }) ;
+          }, e.target.value) ;
           setErrors( {
             ...errors,
             ...newError

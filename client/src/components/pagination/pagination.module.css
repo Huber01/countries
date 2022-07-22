@@ -1,5 +1,5 @@
 
-/* 
+
  
 .pagination{
     display: flex;
@@ -10,8 +10,8 @@
     padding: 0.2rem;
     align-items: center;
 } 
-  */
-
+ 
+/* 
 .pagination{
   display: flex;
   justify-content: space-around;
@@ -20,7 +20,7 @@
   margin-bottom: 1rem;
   padding: 1rem;
   align-items: center;
-}
+} */
 
 .li{
   list-style: disc;

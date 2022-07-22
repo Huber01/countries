@@ -5,6 +5,7 @@ import img from '../../images/fotoLanding.jpg'
 
 export default function LandingPage() {
 
+    
     return (
       <div>
         <img id={style.img} src={img} alt="" />

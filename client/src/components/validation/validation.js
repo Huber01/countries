@@ -37,8 +37,9 @@ export function validateDuration(input){
   return errors
 }
 
-export function validateCountry(input){
+export function validateCountry(input,e){
   let errors={ country: null };
+  if(input.country.includes(e))
   if (!input.country.length) {
     errors.country = "Where can you do this?";
   } 
