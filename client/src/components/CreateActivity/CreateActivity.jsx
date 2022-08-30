@@ -221,7 +221,7 @@ export default function CreateActivity() {
                
                 <select  className={styles.TitleForm} 
                 value={durationMeasure} onChange={(e)=>handleDurationMeasure(e)}>
-                <option defaultValue={null}>Measure duration in...</option>
+                <option defaultValue={null}>duracion del turno</option>
                     <option value ={'minute/s'} >minute/s</option>
                     <option value ={'hour/s'}>hour/s</option>
                     <option value ={'day/s'}>day/s</option>

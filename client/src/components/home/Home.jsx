@@ -20,7 +20,7 @@ function Home(){
     const [filtered, setFiltered]=useState(false)
     const [order, setOrder]=useState('')//definir ordenamientos
     const [currentPage, setCurrentPage]= useState(1);
-    const [countriesPerPage]= useState(10);
+    const [countriesPerPage]= useState(8);
     const [pageLimit, setPageLimit] = useState(1) 
     const indexOfNextPageFirstCountry = currentPage * countriesPerPage;
     const indexOfFirstCountry = indexOfNextPageFirstCountry - countriesPerPage;// arranca por el 0
@@ -95,7 +95,7 @@ function Home(){
         dispatch(renderAllCountries(e.target.value))
         setFiltered(false) 
     }
-    console.log(currentCountries);
+    
     return(
         
         <div className={styles.background} >

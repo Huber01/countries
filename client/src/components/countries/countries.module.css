@@ -1,6 +1,6 @@
 .background{
     opacity:0.8;
-    height: 100vh;
+    /* height: 100vh; */
     width: 100%;
     display: flex !important;
     flex-direction: row;
@@ -11,7 +11,7 @@
     background-image: url(../../images/fondoMundo.jpg);
     background-size: cover;
     overflow: auto;
-/*     padding: 5px; */
+    padding: 5px;
 }
 
 .card {
