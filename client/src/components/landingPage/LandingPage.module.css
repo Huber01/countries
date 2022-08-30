@@ -2,7 +2,7 @@
     position: absolute;
     top: 50%;
     left: 25%;
-    margin: -25px 0 0 -25px;
+    margin: -25px 0 0 -50px;
     display: flex;
     flex-direction: row;
 
@@ -45,7 +45,7 @@
     object-fit: cover;
     position:absolute;
     z-index: -1;
-    margin-left:-770px;
+    margin-left:-613px;
   
 }
 
